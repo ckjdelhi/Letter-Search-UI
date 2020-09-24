@@ -25,7 +25,6 @@ export default class Home extends Component {
 	};
 
 	fetchSearchResults = ( updatedPageNo = '', query ) => {
-		const pageNumber = updatedPageNo ? `&page=${updatedPageNo}` : '';
 		const total = searchData.total;
 		const totalPagesCount = this.getPageCount( total, 10 );
 		
@@ -85,26 +84,26 @@ export default class Home extends Component {
 		}
 	};
 	render() {
-		const { query, loading, message, currentPageNo, totalPages, results } = this.state;
+		const { query, loading, message, currentPageNo, totalPages } = this.state;
 
 		const showPrevLink = 1 < currentPageNo;
 		const showNextLink = totalPages > currentPageNo;
 
 		return (
-			<div className="container">
-			<h2 className="heading">Outbound Letter Search</h2>
-			<label className="search-label" htmlFor="search-input">
+			<div>
+				<h2 className="heading">Outbound Letter Search</h2>
+			<label className="container search-label" htmlFor="search-input">
 				<input
 					type="text"
 					name="query"
 					value={ query }
 					id="search-input"
-					placeholder="Search..."
+					placeholder="Search letter..."
 					onChange={this.handleOnInputChange}
 				/>
 				<i className="fa fa-search search-icon" aria-hidden="true"/>
 			</label>
-			{message && <p className="message">{ message }</p>}
+			{message && <p className="container message">{ message }</p>}
 			<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
 			<PageNavigation
 				loading={loading}
