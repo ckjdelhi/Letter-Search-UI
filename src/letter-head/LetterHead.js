@@ -1,8 +1,9 @@
 import React from 'react';
+import './letterHead.css'
 class LetterHead extends React.Component {
     render(){
         return (
-            <div class="container">
+            <div class="letterHeadContainer">
                 <p>Hello [prospect name],</p>
                 <p>We've been unable to connect for a few weeks now, and that usually means one of two thing:</p>
                 <ol class="highlighter">

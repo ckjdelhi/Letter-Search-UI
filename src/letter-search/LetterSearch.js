@@ -5,9 +5,9 @@ import PageNavigation from './PageNavigation';
 import MediaCard from './MediaCard';
 let searchData = require('./data.json');
 
-export default class Home extends Component {
-  constructor( props ) {
-		super( props ); 
+export default class LetterSearch extends Component {
+  constructor() {
+		super(); 
 		this.state = {
 			query: '',
 			results: {},
@@ -26,7 +26,7 @@ export default class Home extends Component {
 
 	fetchSearchResults = ( updatedPageNo = '', query ) => {
 		const total = searchData.total;
-		const totalPagesCount = this.getPageCount( total, 10 );
+		const totalPagesCount = this.getPageCount( total, 20 );
 		
 		const matches = searchData.hits.filter(s => s.tags.includes(query));
 		const resultNotFoundMsg = ! matches.length
@@ -73,9 +73,7 @@ export default class Home extends Component {
 				<div className="results-container">
 					{ results.map( result => {
 						return (
-							<a key={ result.id } href={ result.largeImageURL } className="result-item">
-								<MediaCard data={result} openLetter={() => this.openLetter()}/>
-							</a>
+							<MediaCard data={result}/>
 						)
 					} ) }
 
@@ -92,7 +90,7 @@ export default class Home extends Component {
 		return (
 			<div>
 				<h2 className="heading">Outbound Letter Search</h2>
-			<label className="container search-label" htmlFor="search-input">
+				<label className="container search-label" htmlFor="search-input">
 				<input
 					type="text"
 					name="query"

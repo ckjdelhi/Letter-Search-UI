@@ -1,18 +1,19 @@
 .container {
-	margin: 5px auto;
+	margin: 80px auto;
 	width: 100%;
 	max-width: 800px;
 }
+.letterHead{
+    margin-top: 300px;
+  }
 .heading {
 	text-align: center;
 	margin-left: -120px;
 }
-.highlighter {
-	background-color: #FFFF00
-}
+
 .search-label {
 	position: relative;
-	margin: 5px auto;
+	margin: 80px auto;
 	width: 100%;
 	max-width: 800px;
 }
@@ -44,6 +45,7 @@
 	display: flex;
 	flex-flow: wrap;
 	margin-left: 50px;
+	margin-top: -130px;
 }
 
 .result-item {

@@ -12,7 +12,9 @@ const Navigation = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/rules-setup">Rules Setup</Nav.Link>
+                    <Nav.Link href="/letter-intake">Letter Intake</Nav.Link>
+                    <Nav.Link href="/letter-search">Letter Search</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

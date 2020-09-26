@@ -1,0 +1,13 @@
+.letterHeadContainer{
+    align-content: center;
+    margin-top: 100px;
+    margin-left: 100px;
+    border: 1px solid #3f4b4a;
+    max-width: 80%;
+  }
+  .highlighter {
+	color: #f7d542
+}
+p {
+    margin-left: 10px;
+}

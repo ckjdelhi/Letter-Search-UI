@@ -21,7 +21,7 @@ export default function MediaCard(prop) {
   const {data} = prop
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={() => history.push('/letterHead')}>
+      <CardActionArea onClick={() => history.push('/letter-head')}>
         <CardMedia
           className={classes.media}
           image={data.previewURL}
