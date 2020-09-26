@@ -8,7 +8,7 @@ const Navigation = (props) => {
     console.log(props);
     return (
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home"><img src={EXL} width="100" height="60" alt="data"/></Navbar.Brand>
+            <Navbar.Brand href="/"><img src={EXL} width="100" height="60" alt="data"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
