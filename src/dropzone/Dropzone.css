@@ -11,22 +11,25 @@
     padding: 8px 15px;
     margin-bottom: 5px;
 }
-
+/*
 .container {
     transform: translateY(-100%);
 }
-
+*/
+.margingTopp{
+    margin-top: -50px;
+    margin-left: 20px;
+}
 .container p {
     color: red;
     text-align: center;
 }
-
 .drop-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
-    width: 800px;
+    
     height: 200px;
     border: 4px dashed #4aa1f3;
 }
@@ -73,8 +76,7 @@
 }
   
 .file-display-container {
-    position: fixed;
-    width: 805px;
+    width: 580px;
 }
   
 .file-status-bar{

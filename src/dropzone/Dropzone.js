@@ -165,6 +165,7 @@ const Dropzone = () => {
     return (
         <>
             <div className="container">
+                <h2 className="title">React Drag and Drop Image Upload</h2>
                 {unsupportedFiles.length === 0 && validFiles.length ? <button className="file-upload-btn" onClick={() => uploadFiles()}>Upload Files</button> : ''} 
                 {unsupportedFiles.length ? <p>Please remove all unsupported files.</p> : ''}
                 <div className="drop-container"
@@ -207,7 +208,6 @@ const Dropzone = () => {
                 <span className="close" onClick={(() => closeModal())}>X</span>
                 <div className="modal-image" ref={modalImageRef}></div>
             </div>
-
             <div className="upload-modal" ref={uploadModalRef}>
                 <div className="overlay"></div>
                 <div className="close" onClick={(() => closeUploadModal())}>X</div>
@@ -217,6 +217,10 @@ const Dropzone = () => {
                         <div className="progress-bar" ref={progressRef}></div>
                     </div>
                 </div>
+            </div>
+            
+            <div className="margingTopp">
+                Matched Template: <b>Tempate1</b>
             </div>
         </>
     );

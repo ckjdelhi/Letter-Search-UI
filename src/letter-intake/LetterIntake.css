@@ -1,7 +1,6 @@
 .title {
     font-size: 2rem;
     text-align: center !important;
-    margin-top: 10%;
     color: #4aa1f3;
     font-weight: bold;
   }
@@ -14,4 +13,22 @@
     align-items: center;
     justify-content: center;
   }
-  
+  .scroll { 
+    margin:4px, 4px; 
+    padding:4px; 
+    border: 1px dotted;
+    width: 560px; 
+    height: 200px; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    text-align:justify; 
+} 
+.fa-check {
+  color: #66c144;
+}
+.fa-times {
+  color:red
+}
+.marginTop{
+  margin-top: 20px;
+}
