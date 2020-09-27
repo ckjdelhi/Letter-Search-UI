@@ -14,6 +14,12 @@ const useStyles = makeStyles({
   media: {
     height: 160,
   },
+  question: {
+    overflow: "hidden",
+    display: "-webkit-box",
+    WebkitLineClamp: 4,
+    WebkitBoxOrient: "vertical"
+  }
 })
 
 export default function MediaCard(prop) {
@@ -33,10 +39,10 @@ export default function MediaCard(prop) {
           <Typography gutterBottom variant="h5" component="h2">
           {data.title}
           </Typography>
-          <Typography variant="body1" component="h1">
+          <Typography variant="body1" component="h1" overflow="hidden">
           Report Date: {data.reportDate}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" className={classes.question} color="textSecondary" component="p">
           {data.description}
           </Typography>
         </CardContent>
