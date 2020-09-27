@@ -1,11 +1,14 @@
 import React from 'react';
 import './letterHead.css'
 class LetterHead extends React.Component {
+    constructor(prop){
+        super();
+    }
     render(){
         return (
             <div class="letterHeadContainer">
-                <p>Hello [prospect name],</p>
-                <p>We've been unable to connect for a few weeks now, and that usually means one of two thing:</p>
+                <p>Hello {this.props.location.title},</p>
+                <p>{this.props.location.description}</p>
                 <ol class="highlighter">
                     <li>Either this isn't a priority for you and your company at the moment</li>
                     <li>You've been busy and we should keep trying to connect</li>

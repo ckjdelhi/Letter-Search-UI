@@ -133,9 +133,15 @@ const Dropzone = () => {
         for (let i = 0; i < validFiles.length; i++) {
             const formData = new FormData();
             formData.append('image', validFiles[i]);
-            formData.append('key', '');
+            //formData.append('key', '');
 
-            axios.post('https://api.imgbb.com/1/upload', formData, {
+            axios.post('https://su9lfxoru2.execute-api.us-east-1.amazonaws.com/default/getTextFromImage', formData, {
+                withCredentials: false,
+                credentials: 'same-origin',
+                mode: 'no-cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                  },
                 onUploadProgress: (progressEvent) => {
                     const uploadPercentage = Math.floor((progressEvent.loaded / progressEvent.total) * 100);
                     progressRef.current.innerHTML = `${uploadPercentage}%`;

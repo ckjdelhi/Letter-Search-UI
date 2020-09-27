@@ -1,11 +1,23 @@
 import React from 'react'
 import './LetterIntake.css'
 import Dropzone from '../dropzone/Dropzone'
+var request = require('request');
 
 class LetterIntake extends React.Component{
-    constructor() {
+    constructor(prop) {
         super()
-        this.state = {}
+        this.state = {data:''}
+  }
+  readData(fileName){
+    let resp = 'File Not Found'
+    request.get('https://exl-upload-image-bucket.s3.amazonaws.com/'+fileName+'.txt', function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            this.setState({data:body})
+            console.log(body)
+            resp =  body
+        }
+    });
+    return resp
   }
   render(){
       return(
@@ -17,20 +29,7 @@ class LetterIntake extends React.Component{
                 <div className="col-sm-6">
                     <div className="container">
                         <h2 className="title">Document Extract</h2>
-                        <div className="scroll">It is a good platform to learn programming.  
-                            It is an educational website. Prepare for the Recruitment drive 
-                            of product based companies like Microsoft, Amazon, Adobe etc with 
-                            a free online placement preparation course. The course focuses  
-                            on various MCQ's & Coding question likely to be asked in the  
-                            interviews & make your upcoming placement season efficient and  
-                            successful. Also, any geeks can help other geeks by writing  
-                            articles on the GeeksforGeeks, publishing articles follow few  
-                            steps that are Articles that need little modification/improvement 
-                            from reviewers are published first. To quickly get your articles 
-                            reviewed, please refer existing articles, their formatting style, 
-                            coding style, and try to make you are close to them. In case you 
-                            are a beginner
-                        </div>
+                        <div className="scroll">{this.readData('doc_new')}</div>
                         <div className="marginTop">
                             <span><i class="fa fa-check" aria-hidden="true"></i> Duplicate Letter Check<br/></span>
                             <span><i class="fa fa-check" aria-hidden="true"></i> Letter Contains PHI Information<br/></span>

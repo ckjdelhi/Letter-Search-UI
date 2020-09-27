@@ -9,10 +9,10 @@ import history from '../history'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 355,
   },
   media: {
-    height: 140,
+    height: 160,
   },
 })
 
@@ -21,10 +21,12 @@ export default function MediaCard(prop) {
   const {data} = prop
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={() => history.push('/letter-head')}>
+      <CardActionArea onClick={() => history.push({
+      pathname: '/letter-Head', title: data.title, description: data.description
+    })}>
         <CardMedia
           className={classes.media}
-          image={data.previewURL}
+          image={data.title.includes('pdf')?require('../images/pdf.png'):require('../images/doc.png')}
           title={data.title}
         />
         <CardContent>

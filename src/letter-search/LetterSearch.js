@@ -3,6 +3,7 @@ import './Search.css';
 import Loader from '../loader.gif';
 import PageNavigation from './PageNavigation';
 import MediaCard from './MediaCard';
+import Axios from "axios";
 let searchData = require('./data.json');
 
 export default class LetterSearch extends Component {
@@ -16,7 +17,19 @@ export default class LetterSearch extends Component {
 			totalResults: 0,
 			totalPages: 0,
 			currentPageNo: 0,
+			readData:{}
 		};
+	}
+	componentDidMount(){
+		
+		Axios.get('http://springbootawsintegration-env.eba-i7iwzqay.us-east-1.elasticbeanstalk.com/files').then(
+			resp=> {
+				this.setState({readData:resp.data})
+			}
+		)
+		if(this.state.query){
+			this.fetchSearchResults( 1, this.state.query );
+		}
 	}
 	getPageCount = ( total, denominator ) => {
 		const divisible	= 0 === total % denominator;
@@ -25,10 +38,13 @@ export default class LetterSearch extends Component {
 	};
 
 	fetchSearchResults = ( updatedPageNo = '', query ) => {
-		const total = searchData.total;
+		const total = this.state.readData.total;
 		const totalPagesCount = this.getPageCount( total, 20 );
 		
-		const matches = searchData.hits.filter(s => s.tags.includes(query));
+		let matches = this.state.readData.filter(s => s.tags.toLowerCase().includes(query.toLowerCase()));
+		if(!matches.length){
+			matches = this.state.readData.filter(s => s.description.toLowerCase().includes(query.toLowerCase()));	
+		}
 		const resultNotFoundMsg = ! matches.length
 								? 'There are no more search results. Please try a new search'
 								: '';
@@ -73,7 +89,9 @@ export default class LetterSearch extends Component {
 				<div className="results-container">
 					{ results.map( result => {
 						return (
-							<MediaCard data={result}/>
+							<div className="result-item">
+								<MediaCard data={result}/>
+							</div>
 						)
 					} ) }
 
@@ -103,13 +121,6 @@ export default class LetterSearch extends Component {
 			</label>
 			{message && <p className="container message">{ message }</p>}
 			<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
-			<PageNavigation
-				loading={loading}
-				showPrevLink={showPrevLink}
-				showNextLink={showNextLink}
-				handlePrevClick={ () => this.handlePageClick('prev')}
-				handleNextClick={ () => this.handlePageClick('next')}
-			/>
 			{ this.renderSearchResults() }
 			<PageNavigation
 				loading={loading}
