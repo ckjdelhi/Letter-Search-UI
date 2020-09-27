@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import './Search.css';
 import Loader from '../loader.gif';
-import PageNavigation from './PageNavigation';
+//import PageNavigation from './PageNavigation';
 import MediaCard from './MediaCard';
 import Axios from "axios";
-let searchData = require('./data.json');
+//let searchData = require('./data.json');
 
 export default class LetterSearch extends Component {
   constructor() {
@@ -100,10 +100,10 @@ export default class LetterSearch extends Component {
 		}
 	};
 	render() {
-		const { query, loading, message, currentPageNo, totalPages } = this.state;
-
-		const showPrevLink = 1 < currentPageNo;
-		const showNextLink = totalPages > currentPageNo;
+		const { query, loading, message} = this.state;
+		//const {urrentPageNo, totalPages } = this.state;
+		//const showPrevLink = 1 < currentPageNo;
+		//const showNextLink = totalPages > currentPageNo;
 
 		return (
 			<div>
@@ -122,13 +122,13 @@ export default class LetterSearch extends Component {
 			{message && <p className="container message">{ message }</p>}
 			<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
 			{ this.renderSearchResults() }
-			<PageNavigation
+			{/*<PageNavigation
 				loading={loading}
 				showPrevLink={showPrevLink}
 				showNextLink={showNextLink}
 				handlePrevClick={ () => this.handlePageClick('prev')}
 				handleNextClick={ () => this.handlePageClick('next')}
-			/>
+			/>*/}
 			</div>
 		)
 	}

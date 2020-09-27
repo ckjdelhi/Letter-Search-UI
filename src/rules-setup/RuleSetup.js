@@ -18,7 +18,7 @@ class RuleSetup extends React.Component {
       };
     render(){
         return(
-            <div class="rule-container">
+            <div className="rule-container">
                 <FormGroup column>
                     <label><h2>Rules Setup:</h2></label>
                     <FormControlLabel
