@@ -36,7 +36,7 @@ class LetterIntake extends React.Component{
                 <div className="col-sm-6">
                     <Dropzone showExtract={this.showExtract} hideBlock={this.hideBlock}/>
                     {this.state.show &&<div className="marginTop">
-                        <span><i className="fa fa-file" aria-hidden="true"></i> Matched Template: <b>Tempate1</b></span>
+                        <span><i className="fa fa-file" aria-hidden="true"></i> Matched Template: <b>N/A</b></span>
                     </div>
                     }
                 </div>
@@ -51,6 +51,7 @@ class LetterIntake extends React.Component{
                           </div>
                           <div className="marginTop">
                             <Delayed waitBeforeShow={2000}>
+                              <h3 className="title1">QC Check</h3>
                               <span><i className="fa fa-check" aria-hidden="true"></i> Duplicate Letter Check<br/></span>
                             </Delayed>
                             <Delayed waitBeforeShow={4000}>

@@ -176,7 +176,7 @@ const Dropzone =(props) => {
     return (
         <>
             <div className="container">
-                <h2 className="title">React Drag and Drop Image Upload</h2>
+                <h2 className="title">Drag and Drop Image Upload</h2>
                 {unsupportedFiles.length === 0 && validFiles.length ? <button className="file-upload-btn" onClick={() => uploadFiles()}>Upload File</button> : ''} 
                 {unsupportedFiles.length ? <p>Please remove unsupported file.</p> : ''}
                 <div className="drop-container"
