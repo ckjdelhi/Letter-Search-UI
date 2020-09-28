@@ -142,9 +142,9 @@ class LetterSearch extends Component {
 						</label>
 						{message && <p className="container message">{ message }</p>}
 					</Grid>
-					<Grid item xs={3}>
+					<Grid item xs={2}>
 					<Box m={2}>
-						<Paper className={classes.paper}>
+						<Paper className="testClass">
 						<label for="cars"><b>Choose Date:</b></label><br/>
 						<select name="cars" id="cars">
 							<option value="volvo">Last Month</option>
@@ -155,28 +155,28 @@ class LetterSearch extends Component {
 						</select><br/><br/>
 						<label><b>Member:</b></label><br/>
 						<input type="checkbox" id="a" name="a" value="Commercial"/>
-  						<label for="a"> Commercial&nbsp;</label>
+  						<label for="a"> Commercial&nbsp;</label><br/>
 						  <input type="checkbox" id="Medicaid" name="Medicaid" value="Medicaid"/>
-  						<label for="Medicaid"> Medicaid&nbsp;</label>
+  						<label for="Medicaid"> Medicaid&nbsp;</label><br/>
 						  <input type="checkbox" id="Medicare" name="Medicare" value="Medicare"/>
   						<label for="Medicare"> Medicare&nbsp;</label>
 
 						  <br/><br/>
 						<label><b>Communication Type:</b></label><br/>
 						<input type="checkbox" id="Claim" name="Claim" value="Claim"/>
-  						<label for="Claim"> Claim&nbsp;</label>
+  						<label for="Claim"> Claim&nbsp;</label><br/>
 						  <input type="checkbox" id="Appeal" name="Appeal" value="Appeal"/>
-  						<label for="Appeal"> Appeal&nbsp;</label>
+  						<label for="Appeal"> Appeal&nbsp;</label><br/>
 						  <input type="checkbox" id="Precertification" name="Precertification" value="Precertification"/>
   						<label for="Precertification"> Precertification&nbsp;</label><br/>
 						  <input type="checkbox" id="Denial" name="Denial" value="Denial"/>
-  						<label for="Denial"> Denial   &nbsp;</label>
+  						<label for="Denial"> Denial   &nbsp;</label><br/>
 						  <input type="checkbox" id="Benefit" name="Benefit" value="Benefit"/>
-  						<label for="Benefit"> Explanation of Benefit</label>
+  						<label for="Benefit"> Explanation of Benefit</label><br/>
 						</Paper>
 						</Box>
 					</Grid>
-					<Grid item xs={9}>
+					<Grid item xs={10}>
 						<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
 						{ this.renderSearchResults() }
 					</Grid>

@@ -10,6 +10,7 @@
 	text-align: center;
 	margin-left: -120px;
 	margin-bottom: -65px;
+	font-size: 1.5rem;
 }
 
 .search-label {
@@ -45,8 +46,8 @@
 .results-container {
 	display: flex;
 	flex-flow: wrap;
-	margin-left: 50px;
-	margin-top: -90px;
+	margin-left: -28px;
+    margin-top: -87px;
 }
 
 .result-item {
@@ -91,3 +92,18 @@
 	background: #f1f1f1;
 	opacity: 0.5;
 }*/
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1; 
+	background-color: #ffffff;
+  }
+  .modal-holder.modal-backdrop{z-index: 100}
+.modal-holder + .modal-dialog {z-index: 1000}
+
+.testClass{
+	margin-top: -83px;
+}
