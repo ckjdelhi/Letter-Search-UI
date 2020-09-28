@@ -3,51 +3,12 @@ import './LetterIntake.css'
 import Dropzone from '../dropzone/Dropzone'
 import Delayed from '../delay/Delayed'
 import {URL} from '../constant/url'
-const fetch = require('node-fetch');
 
-const fetchWithRetry = (url, numberOfRetry) => {
-  return new Promise((resolve, reject) => {
-    let attempts = 1;
+require('es6-promise').polyfill();
+ 
+var originalFetch = require('isomorphic-fetch');
+var fetch = require('fetch-retry')(originalFetch);
 
-    const fetch_retry = (url, n) => {
-      
-      return fetch(url,{
-        method: 'GET',
-        headers: {'Content-Type': 'text/plain', },
-      }).then(res => {
-          
-          const status = res.status;            
-
-          if(status === 200) {
-              return resolve(res);
-          }            
-          else if (n === 1) {
-              throw reject("Error in getting http data");                
-          }
-          else {
-              console.log("Retry again: Got back " + status);
-              console.log("With delay " + attempts * 3000);
-              setTimeout(() => {
-                  attempts++;
-                  
-                  fetch_retry(url, n - 1);                    
-              }, attempts * 3000);
-          }            
-      }).catch(function (error) {            
-          if (n === 1) {
-              reject(error)
-          }
-          else {
-          setTimeout(() => {
-              attempts++
-              fetch_retry(url, n - 1);
-              }, attempts * 3000);
-          }
-      });
-    }        
-    return fetch_retry(url, numberOfRetry);
-  });
-}
 class LetterIntake extends React.Component{
     constructor(props) {
         super(props);
@@ -62,9 +23,20 @@ class LetterIntake extends React.Component{
   readData(fileName){
       let url = URL.extractData+'/'+fileName+'.txt'
     //fetch(url).then(response => response.text()).then(data => this.setState({data:data}));
-    fetchWithRetry(url, 3).then(response => response.text()).then(data => this.setState({data:data})).catch(e => {
-    console.log(e);
-});
+    fetch(url, {
+      retries: 3,
+      retryDelay: 2000,
+        retryOn: function(attempt, error, response) {
+          // retry on any network error, or 4xx or 5xx status codes
+          if (error !== null || response.status >= 400) {
+            console.log(`retrying, attempt number ${attempt + 1}`);
+            return true;
+          }
+        }
+    })
+    .then(function(response) {
+      return response.text();
+    }).then(data => this.setState({data:data}));
   }
   showExtract(fileName){
    this.setState({show:true}) 
@@ -82,17 +54,19 @@ class LetterIntake extends React.Component{
             <div className="row">
                 <div className="col-sm-6">
                     <Dropzone showExtract={this.showExtract} hideBlock={this.hideBlock}/>
+                        
                     {this.state.show &&<div className="marginTop">
                         <span><i className="fa fa-file" aria-hidden="true"></i> Matched Template: <b>N/A</b></span>
                     </div>
                     }
                 </div>
+                       
                 {this.state.show && 
                   <div className="col-sm-6">
                       <div className="container">
                           <h2 className="title">Document Extract</h2>
                           <div className="scroll">
-                            <Delayed waitBeforeShow={2000}>
+                          <Delayed waitBeforeShow={2000}>
                               {this.state.data}
                             </Delayed>
                           </div>
