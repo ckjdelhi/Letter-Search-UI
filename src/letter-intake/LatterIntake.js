@@ -11,7 +11,10 @@ const fetchWithRetry = (url, numberOfRetry) => {
 
     const fetch_retry = (url, n) => {
       
-      return fetch(url).then(res => {
+      return fetch(url,{
+        method: 'GET',
+        headers: {'Content-Type': 'text/plain', },
+      }).then(res => {
           
           const status = res.status;            
 
