@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
-
+import {URL} from '../constant/url'
 import './Dropzone.css';
 
-const Dropzone = () => {
+const Dropzone =(props) => {
     const fileInputRef = useRef();
     const modalImageRef = useRef();
     const modalRef = useRef();
@@ -77,7 +77,9 @@ const Dropzone = () => {
     }
 
     const validateFile = (file) => {
-        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-icon'];
+        //const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-icon'];
+        const validTypes = ['image/png', 'application/pdf'];
+        props.hideBlock();
         if (validTypes.indexOf(file.type) === -1) {
             return false;
         }
@@ -125,22 +127,21 @@ const Dropzone = () => {
     const closeModal = () => {
         modalRef.current.style.display = "none";
         modalImageRef.current.style.backgroundImage = 'none';
+        
     }
 
-    const uploadFiles = async () => {
+    const uploadFiles =  () => {
         uploadModalRef.current.style.display = 'block';
         uploadRef.current.innerHTML = 'File(s) Uploading...';
-        for (let i = 0; i < validFiles.length; i++) {
+        
+       //for (let i = 0; i < validFiles.length; i++) {
             const formData = new FormData();
-            formData.append('image', validFiles[i]);
+            formData.append('file', validFiles[0]);
             //formData.append('key', '');
 
-            axios.post('https://su9lfxoru2.execute-api.us-east-1.amazonaws.com/default/getTextFromImage', formData, {
-                withCredentials: false,
-                credentials: 'same-origin',
-                mode: 'no-cors',
+            axios.post(URL.searchFiles+'/files', formData, {
                 headers: {
-                    'Access-Control-Allow-Origin': '*'
+                    "Content-Type": "multipart/form-data",
                   },
                 onUploadProgress: (progressEvent) => {
                     const uploadPercentage = Math.floor((progressEvent.loaded / progressEvent.total) * 100);
@@ -153,6 +154,7 @@ const Dropzone = () => {
                         setValidFiles([...validFiles]);
                         setSelectedFiles([...validFiles]);
                         setUnsupportedFiles([...validFiles]);
+                        
                     }
                 },
             })
@@ -160,11 +162,14 @@ const Dropzone = () => {
                 uploadRef.current.innerHTML = `<span class="error">Error Uploading File(s)</span>`;
                 progressRef.current.style.backgroundColor = 'red';
             })
-        }
+       // }
     }
 
     const closeUploadModal = () => {
         uploadModalRef.current.style.display = 'none';
+        
+        console.log(fileInputRef.current.files[0].name)
+        props.showExtract(fileInputRef.current.files[0].name);
     }
 
 
@@ -172,8 +177,8 @@ const Dropzone = () => {
         <>
             <div className="container">
                 <h2 className="title">React Drag and Drop Image Upload</h2>
-                {unsupportedFiles.length === 0 && validFiles.length ? <button className="file-upload-btn" onClick={() => uploadFiles()}>Upload Files</button> : ''} 
-                {unsupportedFiles.length ? <p>Please remove all unsupported files.</p> : ''}
+                {unsupportedFiles.length === 0 && validFiles.length ? <button className="file-upload-btn" onClick={() => uploadFiles()}>Upload File</button> : ''} 
+                {unsupportedFiles.length ? <p>Please remove unsupported file.</p> : ''}
                 <div className="drop-container"
                     onDragOver={dragOver}
                     onDragEnter={dragEnter}
@@ -183,7 +188,7 @@ const Dropzone = () => {
                 >
                     <div className="drop-message">
                         <div className="upload-icon"></div>
-                        Drag & Drop files here or click to select file(s)
+                        Drag & Drop file here or click to select file
                     </div>
                     <input
                         ref={fileInputRef}
@@ -223,10 +228,6 @@ const Dropzone = () => {
                         <div className="progress-bar" ref={progressRef}></div>
                     </div>
                 </div>
-            </div>
-            
-            <div className="margingTopp">
-                Matched Template: <b>Tempate1</b>
             </div>
         </>
     );

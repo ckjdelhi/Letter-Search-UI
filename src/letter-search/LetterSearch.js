@@ -5,6 +5,7 @@ import Loader from '../loader.gif';
 import MediaCard from './MediaCard';
 import Axios from "axios";
 //let searchData = require('./data.json');
+import {URL} from '../constant/url';
 
 export default class LetterSearch extends Component {
   constructor() {
@@ -22,7 +23,7 @@ export default class LetterSearch extends Component {
 	}
 	componentDidMount(){
 		
-		Axios.get('http://springbootawsintegration-env.eba-i7iwzqay.us-east-1.elasticbeanstalk.com/files').then(
+		Axios.get(URL.searchFiles+'/files').then(
 			resp=> {
 				this.setState({readData:resp.data})
 			}
