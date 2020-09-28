@@ -6,8 +6,24 @@ import MediaCard from './MediaCard';
 import Axios from "axios";
 //let searchData = require('./data.json');
 import {URL} from '../constant/url';
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { Box } from "@material-ui/core";
 
-export default class LetterSearch extends Component {
+const useStyles = makeStyles((theme) => ({
+  root: {
+	flexGrow: 1
+  },
+  paper: {
+	padding: theme.spacing(4),
+    textAlign: "center",
+	color: theme.palette.text.secondary
+  }
+}));
+
+class LetterSearch extends Component {
+
   constructor() {
 		super(); 
 		this.state = {
@@ -84,7 +100,6 @@ export default class LetterSearch extends Component {
 
 	renderSearchResults = () => {
 		const { results } = this.state;
-
 		if ( Object.keys( results ).length && results.length ) {
 			return (
 				<div className="results-container">
@@ -100,37 +115,74 @@ export default class LetterSearch extends Component {
 			)
 		}
 	};
+	
 	render() {
+		
+		const { classes } = this.props;
 		const { query, loading, message} = this.state;
 		//const {urrentPageNo, totalPages } = this.state;
 		//const showPrevLink = 1 < currentPageNo;
 		//const showNextLink = totalPages > currentPageNo;
 
 		return (
-			<div>
-				<h2 className="heading">Outbound Letter Search</h2>
-				<label className="container search-label" htmlFor="search-input">
-				<input
-					type="text"
-					name="query"
-					value={ query }
-					id="search-input"
-					placeholder="Search letter..."
-					onChange={this.handleOnInputChange}
-				/>
-				<i className="fa fa-search search-icon" aria-hidden="true"/>
-			</label>
-			{message && <p className="container message">{ message }</p>}
-			<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
-			{ this.renderSearchResults() }
-			{/*<PageNavigation
-				loading={loading}
-				showPrevLink={showPrevLink}
-				showNextLink={showNextLink}
-				handlePrevClick={ () => this.handlePageClick('prev')}
-				handleNextClick={ () => this.handlePageClick('next')}
-			/>*/}
+			<div className={classes.root}>
+				<Grid container spacing={1}>
+					<Grid item xs={12}>
+						<h2 className="heading">Outbound Letter Search</h2>
+						<label className="container search-label" htmlFor="search-input">
+						<input
+							type="text"
+							name="query"
+							value={ query }
+							id="search-input"
+							placeholder="Search letter..."
+							onChange={this.handleOnInputChange}
+						/>
+						<i className="fa fa-search search-icon" aria-hidden="true"/>
+						</label>
+						{message && <p className="container message">{ message }</p>}
+					</Grid>
+					<Grid item xs={3}>
+					<Box m={2}>
+						<Paper className={classes.paper}>
+						<label for="cars"><b>Choose Date:</b></label><br/>
+						<select name="cars" id="cars">
+							<option value="volvo">Last Month</option>
+							<option value="saab">Last 3 Months</option>
+							<option value="opel">Last 6 Months</option>
+							<option value="audi">Last 1 Year</option>
+							<option value="audi">More Than 1 Year</option>
+						</select><br/><br/>
+						<label><b>Member:</b></label><br/>
+						<input type="checkbox" id="a" name="a" value="Commercial"/>
+  						<label for="a"> Commercial&nbsp;</label>
+						  <input type="checkbox" id="Medicaid" name="Medicaid" value="Medicaid"/>
+  						<label for="Medicaid"> Medicaid&nbsp;</label>
+						  <input type="checkbox" id="Medicare" name="Medicare" value="Medicare"/>
+  						<label for="Medicare"> Medicare&nbsp;</label>
+
+						  <br/><br/>
+						<label><b>Communication Type:</b></label><br/>
+						<input type="checkbox" id="Claim" name="Claim" value="Claim"/>
+  						<label for="Claim"> Claim&nbsp;</label>
+						  <input type="checkbox" id="Appeal" name="Appeal" value="Appeal"/>
+  						<label for="Appeal"> Appeal&nbsp;</label>
+						  <input type="checkbox" id="Precertification" name="Precertification" value="Precertification"/>
+  						<label for="Precertification"> Precertification&nbsp;</label><br/>
+						  <input type="checkbox" id="Denial" name="Denial" value="Denial"/>
+  						<label for="Denial"> Denial   &nbsp;</label>
+						  <input type="checkbox" id="Benefit" name="Benefit" value="Benefit"/>
+  						<label for="Benefit"> Explanation of Benefit</label>
+						</Paper>
+						</Box>
+					</Grid>
+					<Grid item xs={9}>
+						<img src={ Loader } className={`search-loading ${ loading ? 'show' : 'hide' }`} alt="loader"/>
+						{ this.renderSearchResults() }
+					</Grid>
+				</Grid>
 			</div>
 		)
 	}
 }
+export default withStyles(useStyles)(LetterSearch)

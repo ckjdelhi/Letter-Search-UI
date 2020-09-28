@@ -21,16 +21,16 @@
 
 .search-icon {
     position: absolute;
-    top: 18px;
-    font-size: 31px;
+    top: 5px;
+    font-size: 25px;
     color: #077971;
     right: -125px;
 }
 
 .container input {
     width: 100%;
-    padding: 14px;
-    font-size: 28px;
+    
+    font-size: 20px;
     font-style: italic;
     color: #444;
     box-sizing: border-box;

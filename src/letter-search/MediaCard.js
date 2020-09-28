@@ -9,10 +9,10 @@ import history from '../history'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 355,
+    maxWidth: 250,
   },
   media: {
-    height: 160,
+    height: 100,
   },
   question: {
     overflow: "hidden",
